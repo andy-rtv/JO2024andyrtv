@@ -1,0 +1,10 @@
+﻿@using JO2024andyrtv.Models
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+@{
+    List<PanierItem> cart = HttpContextAccessor.HttpContext.Session.Get<List<PanierItem>>("Cart") ?? new List<PanierItem>();
+}
+
+<a class="nav-link" asp-controller="Home" asp-action="Cart">
+    <i class="bi bi-cart"></i> Panier (<span id="cart-count">@cart.Count</span>)
+</a>
