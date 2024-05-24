@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Get the connection string from environment variables
 var connectionString = builder.Configuration.GetConnectionString("JO2024ContextConnection") ?? throw new InvalidOperationException("Connection string 'JO2024ContextConnection' not found.");
 
 builder.Services.AddDbContext<JO2024Context>(options =>
