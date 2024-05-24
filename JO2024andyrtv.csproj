@@ -33,4 +33,8 @@
     <PackageReference Include="QRCoder" Version="1.5.1" />
   </ItemGroup>
 
+  <Target Name="PrePublishTarget" AfterTargets="Publish">
+  <Exec Command="dotnet ef database update" />
+</Target>
+
 </Project>
