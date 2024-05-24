@@ -5,7 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("JO2024ContextConnection") ?? throw new InvalidOperationException("Connection string 'JO2024ContextConnection' not found.");
+// Utiliser la variable d'environnement DATABASE_URL pour la connexion à la base de données
+var connectionString = GetHerokuPostgresqlConnectionString() ?? builder.Configuration.GetConnectionString("JO2024ContextConnection") ?? throw new InvalidOperationException("Connection string 'JO2024ContextConnection' not found.");
 
 builder.Services.AddDbContext<JO2024Context>(options =>
     options.UseNpgsql(connectionString));
@@ -63,3 +64,15 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.Run();
+
+static string GetHerokuPostgresqlConnectionString()
+{
+    var databaseUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+    if (string.IsNullOrEmpty(databaseUrl))
+        return null;
+
+    var uri = new Uri(databaseUrl);
+    var userInfo = uri.UserInfo.Split(':');
+
+    return $"Host={uri.Host};Port={uri.Port};Database={uri.AbsolutePath.Trim('/')};Username={userInfo[0]};Password={userInfo[1]};SSL Mode=Require;Trust Server Certificate=true";
+}
