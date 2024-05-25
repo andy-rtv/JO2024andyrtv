@@ -5,10 +5,15 @@ using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("JO2024ContextConnection") ?? throw new InvalidOperationException("Connection string 'JO2024ContextConnection' not found.");
+// Utiliser les variables d'environnement pour les connexions Heroku
+var defaultConnectionString = Environment.GetEnvironmentVariable("DATABASE_URL") ??
+                              builder.Configuration.GetConnectionString("DefaultConnection");
+
+var contextConnectionString = Environment.GetEnvironmentVariable("DATABASE_URL") ??
+                              builder.Configuration.GetConnectionString("JO2024ContextConnection");
 
 builder.Services.AddDbContext<JO2024Context>(options =>
-    options.UseNpgsql(connectionString));
+    options.UseNpgsql(contextConnectionString));
 
 builder.Services.AddDefaultIdentity<JO2024User>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
