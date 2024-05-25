@@ -7,14 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Procfile" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Procfile" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="wwwroot\fonts\" />
     <Folder Include="wwwroot\qrcodes\" />
   </ItemGroup>
