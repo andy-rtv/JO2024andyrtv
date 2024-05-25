@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <Target Name="PrePublishTarget" AfterTargets="Publish">
-  <Exec Command="dotnet ef database update" />
+  <Exec Command="update-database" />
 </Target>
 
 </Project>
