@@ -1,1 +1,1 @@
-﻿web: dotnet JO2024andyrtv.dll
+web: dotnet JO2024andyrtv.dll 
