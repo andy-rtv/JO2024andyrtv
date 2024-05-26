@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JO2024andyrtv.Migrations
 {
     [DbContext(typeof(JO2024Context))]
-    [Migration("20240526201955_InitialCreate")]
+    [Migration("20240526220040_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -28,8 +28,7 @@ namespace JO2024andyrtv.Migrations
             modelBuilder.Entity("JO2024andyrtv.Areas.Identity.Data.JO2024User", b =>
                 {
                     b.Property<string>("Id")
-                        .HasMaxLength(128)
-                        .HasColumnType("varchar(128)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
@@ -111,10 +110,10 @@ namespace JO2024andyrtv.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Id_Utilisateur")
-                        .HasColumnType("varchar(128)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<decimal>("MontantTotal")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.HasKey("Id_Achat");
 
@@ -176,7 +175,7 @@ namespace JO2024andyrtv.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<decimal>("Prix")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<string>("SportName")
                         .IsRequired()
@@ -235,7 +234,7 @@ namespace JO2024andyrtv.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Id_Utilisateur")
-                        .HasColumnType("varchar(128)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("QRCodePath")
                         .HasColumnType("longtext");
@@ -257,8 +256,7 @@ namespace JO2024andyrtv.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
-                        .HasMaxLength(128)
-                        .HasColumnType("varchar(128)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -269,8 +267,8 @@ namespace JO2024andyrtv.Migrations
                         .HasColumnType("varchar(256)");
 
                     b.Property<string>("NormalizedName")
-                        .HasMaxLength(128)
-                        .HasColumnType("varchar(128)");
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
 
                     b.HasKey("Id");
 
@@ -297,7 +295,7 @@ namespace JO2024andyrtv.Migrations
 
                     b.Property<string>("RoleId")
                         .IsRequired()
-                        .HasColumnType("varchar(128)");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 
@@ -322,7 +320,7 @@ namespace JO2024andyrtv.Migrations
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("varchar(128)");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 
@@ -346,7 +344,7 @@ namespace JO2024andyrtv.Migrations
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("varchar(128)");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -358,10 +356,10 @@ namespace JO2024andyrtv.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("varchar(128)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("RoleId")
-                        .HasColumnType("varchar(128)");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -373,7 +371,7 @@ namespace JO2024andyrtv.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("varchar(128)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("LoginProvider")
                         .HasMaxLength(128)

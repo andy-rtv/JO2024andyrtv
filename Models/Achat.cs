@@ -10,8 +10,12 @@ namespace JO2024andyrtv.Models
     {
         [Key]
         public int Id_Achat { get; set; }
+
         public DateTime DateAchat { get; set; }
+
+        [Column(TypeName = "decimal(10,2)")]
         public decimal MontantTotal { get; set; }
+
         public Guid AchatGuid { get; set; }
 
         // Foreign key

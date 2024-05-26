@@ -1,5 +1,4 @@
 ﻿using JO2024andyrtv.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -41,17 +40,14 @@ namespace JO2024andyrtv.Areas.Identity.Data
                 .HasForeignKey(t => t.Id_AchatEvenementOffre)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Add key length configurations for MySQL compatibility
-            builder.Entity<IdentityRole>(entity =>
-            {
-                entity.Property(m => m.Id).HasMaxLength(128);
-                entity.Property(m => m.NormalizedName).HasMaxLength(128);
-            });
+            // Configure decimal properties
+            builder.Entity<Evenement>()
+                .Property(e => e.Prix)
+                .HasColumnType("decimal(10,2)");
 
-            builder.Entity<JO2024User>(entity =>
-            {
-                entity.Property(m => m.Id).HasMaxLength(128);
-            });
+            builder.Entity<Achat>()
+                .Property(a => a.MontantTotal)
+                .HasColumnType("decimal(10,2)");
         }
     }
 }
