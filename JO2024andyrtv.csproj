@@ -28,9 +28,4 @@
     <PackageReference Include="QRCoder" Version="1.5.1" />
   </ItemGroup>
 
-  <Target Name="PrePublishScript" BeforeTargets="Publish">
-    <Exec Command="dotnet tool restore" />
-    <Exec Command="dotnet ef database update" />
-  </Target>
-
 </Project>
