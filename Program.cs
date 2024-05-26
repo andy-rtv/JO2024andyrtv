@@ -6,14 +6,11 @@ using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
 
 // Utiliser les variables d'environnement pour les connexions Heroku
-var defaultConnectionString = Environment.GetEnvironmentVariable("DATABASE_URL") ??
+var defaultConnectionString = Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection") ??
                               builder.Configuration.GetConnectionString("DefaultConnection");
 
-var contextConnectionString = Environment.GetEnvironmentVariable("DATABASE_URL") ??
-                              builder.Configuration.GetConnectionString("JO2024ContextConnection");
-
 builder.Services.AddDbContext<JO2024Context>(options =>
-    options.UseNpgsql(contextConnectionString));
+    options.UseNpgsql(defaultConnectionString));
 
 builder.Services.AddDefaultIdentity<JO2024User>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
