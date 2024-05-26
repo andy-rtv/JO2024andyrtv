@@ -1,16 +1,17 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using JO2024andyrtv.Areas.Identity.Data;
-using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Utiliser les variables d'environnement pour les connexions Heroku
 var defaultConnectionString = Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection") ??
                               builder.Configuration.GetConnectionString("DefaultConnection");
 
+Console.WriteLine($"Connection String: {defaultConnectionString}"); // Pour déboguer
+
 builder.Services.AddDbContext<JO2024Context>(options =>
     options.UseMySql(defaultConnectionString, ServerVersion.AutoDetect(defaultConnectionString)));
-
 
 builder.Services.AddDefaultIdentity<JO2024User>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
