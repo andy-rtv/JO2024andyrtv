@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JO2024andyrtv.Models
 {
@@ -40,7 +39,6 @@ namespace JO2024andyrtv.Models
         [Required(ErrorMessage = "Le type d'épreuve est requis.")]
         public TypeEpreuve TypeEpreuve { get; set; }
 
-        [Column(TypeName = "decimal(10,2)")]
         [DataType(DataType.Currency)]
         [Range(0, (double)decimal.MaxValue, ErrorMessage = "Le prix doit être un nombre positif.")]
         public decimal Prix { get; set; }
