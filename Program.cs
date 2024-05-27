@@ -10,7 +10,7 @@ var defaultConnectionString = Environment.GetEnvironmentVariable("ConnectionStri
                               builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<JO2024Context>(options =>
-    options.UseMySql(defaultConnectionString, ServerVersion.AutoDetect(defaultConnectionString)));
+    options.UseMySql(defaultConnectionString, new MySqlServerVersion(new Version(8, 0, 21))));
 
 builder.Services.AddDefaultIdentity<JO2024User>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
