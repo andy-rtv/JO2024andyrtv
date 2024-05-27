@@ -22,13 +22,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
+    <PackageReference Include="MySql.EntityFrameworkCore" Version="8.0.2" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.2" />
     <PackageReference Include="QRCoder" Version="1.5.1" />
   </ItemGroup>
-
-  <Target Name="PrePublishScript" BeforeTargets="Publish">
-    <Exec Command="dotnet tool restore" />
-    <Exec Command="dotnet ef database update" />
-  </Target>
 
 </Project>

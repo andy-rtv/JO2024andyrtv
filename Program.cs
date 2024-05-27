@@ -9,11 +9,25 @@ var builder = WebApplication.CreateBuilder(args);
 var defaultConnectionString = Environment.GetEnvironmentVariable("DATABASE_URL") ??
                               builder.Configuration.GetConnectionString("DefaultConnection");
 
-var contextConnectionString = Environment.GetEnvironmentVariable("DATABASE_URL") ??
-                              builder.Configuration.GetConnectionString("JO2024ContextConnection");
+// Traiter la chaîne de connexion DATABASE_URL pour la compatibilité Heroku
+if (defaultConnectionString != null && defaultConnectionString.StartsWith("postgres://"))
+{
+    defaultConnectionString = defaultConnectionString.Replace("postgres://", string.Empty);
+    var pgUserPass = defaultConnectionString.Split("@")[0];
+    var pgHostPortDb = defaultConnectionString.Split("@")[1];
+    var pgHostPort = pgHostPortDb.Split("/")[0];
+    var pgDb = pgHostPortDb.Split("/")[1];
+
+    var pgUser = pgUserPass.Split(":")[0];
+    var pgPass = pgUserPass.Split(":")[1];
+    var pgHost = pgHostPort.Split(":")[0];
+    var pgPort = pgHostPort.Split(":")[1];
+
+    defaultConnectionString = $"Host={pgHost};Port={pgPort};Database={pgDb};Username={pgUser};Password={pgPass};sslmode=Prefer;Trust Server Certificate=true";
+}
 
 builder.Services.AddDbContext<JO2024Context>(options =>
-    options.UseNpgsql(contextConnectionString));
+    options.UseNpgsql(defaultConnectionString));
 
 builder.Services.AddDefaultIdentity<JO2024User>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()

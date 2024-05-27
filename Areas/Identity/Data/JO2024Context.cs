@@ -39,6 +39,15 @@ namespace JO2024andyrtv.Areas.Identity.Data
                 .WithMany(aeo => aeo.Tickets)
                 .HasForeignKey(t => t.Id_AchatEvenementOffre)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            // Configure decimal properties
+            builder.Entity<Evenement>()
+                .Property(e => e.Prix)
+                .HasColumnType("decimal(10,2)");
+
+            builder.Entity<Achat>()
+                .Property(a => a.MontantTotal)
+                .HasColumnType("decimal(10,2)");
         }
     }
 }
