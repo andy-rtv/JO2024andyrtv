@@ -1,3 +1,4 @@
+Cette version n'as pas été déployé sur Heroku, https://github.com/andy-rtv/Bloc3 est le bon dépôt.
 Comment faire fonctionner JO2024andyrtv localement? 
 1. Télécharger pgAdmin 4 avec POSTGRESQL 16
 2. mettre le dossier du projet dans C:\Users\utilisateur\source\repos\JO2024andyrtv
